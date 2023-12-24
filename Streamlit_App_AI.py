@@ -62,9 +62,32 @@ def machine_learning_page():
     # Add content about machine learning algorithms and source code
 
 def main():
+    # Add navigation bar at the top
+    st.beta_container()
+    st.markdown(
+        """
+        <style>
+            .reportview-container {
+                flex-direction: row;
+            }
+
+            header > .toolbar {
+                flex-direction: row;
+                width: 100%;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            header > .toolbar > * {
+                flex: 1;
+            }
+        </style>
+        """
+    )
+
     st.sidebar.title("Navigation")
     pages = {
-        "Homepage": homepage,
+        "Introduction": introduction_page,
         "Basic Python": basic_python_page,
         "Machine Learning": machine_learning_page,
     }
