@@ -130,7 +130,7 @@ def machine_learning_page():
 
     with tab2:
         st.write("Let's explore Supervised Machine Learning.")
-        selected_supervised_model = st.selectbox("Select a Supervised Machine Learning Model", ["Ridge", "Lasso", "LDA", "SVM", "Decision Tree", "GBM", "XGBM", "LightGBM"])
+        selected_supervised_model = st.selectbox("Select a Supervised Machine Learning Model", ["Ridge", "Lasso", "LDA", "SVM", "Decision Tree", "Random Forest", "GBM", "XGBM", "LightGBM"])
         if selected_supervised_model == "Ridge":
             st.write("Here is the code for Ridge")
             rdige_code = """
