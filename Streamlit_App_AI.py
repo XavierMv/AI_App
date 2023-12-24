@@ -67,12 +67,8 @@ def basic_python_page():
         pip install numpy
         """
 
-        code_import = """
-        import numpy as np
-        """
 
         st.code_install(code_install, language = "python")
-        st.code_import(code_import, language = "python")
 
 
     with tab2:
