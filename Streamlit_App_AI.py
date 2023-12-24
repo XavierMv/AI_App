@@ -63,7 +63,6 @@ def machine_learning_page():
 
 def main():
     # Add navigation bar at the top
-    st.beta_container()
     st.markdown(
         """
         <style>
@@ -87,7 +86,7 @@ def main():
 
     st.sidebar.title("Navigation")
     pages = {
-        "Introduction": homepage,
+        "Homepage": homepage,
         "Basic Python": basic_python_page,
         "Machine Learning": machine_learning_page,
     }
