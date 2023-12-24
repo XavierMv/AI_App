@@ -117,6 +117,23 @@ def basic_python_page():
     
 def machine_learning_page():
     st.title("Machine Learning Algorithms")
+    selected_approach = st.radio("Select a Machine Learning Approach", ["Unsupervised", "Supervised"])
+
+    if selected_approach == "Unsupervised":
+        st.write("Let's create a simple unsupervised machine learning model using the Iris dataset.")
+        selected_algorithm = st.radio("Select an Unsupervised Machine Learning Algorithm", ["K-Means", "Hierarchical Clustering"])
+        if selected_algorithm == "K-Means":
+            st.write("Here is the code for K-Means")
+        elif selected_algorithm == "Hierarchical Clustering":
+            st.write("Here is the code for Hierarchical Clustering")
+
+    elif selected_approach == "Supervised":
+        st.write("Let's explore Supervised Machine Learning.")
+        selected_supervised_model = st.radio("Select a Supervised Machine Learning Model", ["Ridge", "Lasso"])
+        if selected_supervised_model == "Ridge":
+            st.write("Here is the code for Ridge")
+        elif selected_supervised_model == "Lasso":
+            st.write("Here is the code for Lasso")
     
 def main():
     st.sidebar.title("Navigation")
