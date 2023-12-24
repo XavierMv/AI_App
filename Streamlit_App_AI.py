@@ -63,9 +63,36 @@ def basic_python_page():
         st.write('As a first step install and import numpy for usage')
         st.write("Run the first commmand on your terminal and add the next chunk of code on the top of your script.")
 
-        code = '''def hello():
-        print("Hello, Streamlit!")'''
-        st.code(code, language='python')
+        install_code = """
+        pip install numpy
+        """
+        st.code(install_code, language="python")
+
+        # Chunk of code for importing NumPy
+        st.write("### Import NumPy")
+        import_code = """
+        import numpy as np
+        """
+        st.code(import_code, language="python")
+
+        # Chunk of code for basic operations with NumPy
+        st.write("### Basic Operations with NumPy")
+        operations_code = """
+        # Create a NumPy array
+        arr = np.array([1, 2, 3, 4, 5])
+
+        # Print the array
+        print("Original Array:", arr)
+
+        # Calculate the mean
+        mean_value = np.mean(arr)
+        print("Mean:", mean_value)
+
+        # Calculate the sum
+        sum_value = np.sum(arr)
+        print("Sum:", sum_value)
+        """
+        st.code(operations_code, language="python")
 
 
     with tab2:
