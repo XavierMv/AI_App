@@ -55,12 +55,35 @@ def homepage():
 
 def basic_python_page():
     st.title("Basic Python Commands with Pandas and NumPy")
-    # Add content about basic Python commands, Pandas, and NumPy
+    tab_titles = ['Numpy', 'Pandas']
+    tab1, tab2 = st.tabs(tab_titles)
 
+    with tab1:
+        st.header('Numpy')
+        st.write('As a first step install and import numpy for usage')
+        st.write("Run the first commmand on your terminal and add the next chunk of code on the top of your script.")
+
+        code_install = """
+        pip install numpy
+        """
+
+        code_import = """
+        import numpy as np
+        """
+
+        st.code_install(code_install, language = "python")
+        st.code_import(code_import, language = "python")
+
+
+    with tab2:
+        st.header('Pandas')
+        st.write('As a first step install and import pandas for usage')
+
+
+    
 def machine_learning_page():
     st.title("Machine Learning Algorithms")
-    # Add content about machine learning algorithms and source code
-
+    
 def main():
     st.sidebar.title("Navigation")
     pages = {
