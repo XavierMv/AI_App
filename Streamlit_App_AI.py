@@ -69,17 +69,7 @@ def main():
         "Machine Learning": machine_learning_page,
     }
 
-    selected_page = st.sidebar.button("Homepage")
-    if selected_page:
-        homepage()
-
-    selected_page = st.sidebar.button("Basic Python")
-    if selected_page:
-        basic_python_page()
-
-    selected_page = st.sidebar.button("Machine Learning")
-    if selected_page:
-        machine_learning_page()
+    selected_page = st.sidebar.selectbox("Select a page", list(pages.keys()))
 
     pages[selected_page]()
 
