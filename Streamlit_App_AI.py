@@ -197,22 +197,24 @@ def statistical_learning_page():
         url = "https://raw.githubusercontent.com/datasets/sales-of-shampoo-over-a-three-yea/master/sales-of-shampoo-over-a-three-yea.csv"
         df = pd.read_csv(url)
 
-        X = df.drop('Sales',axis=1)
+        X = df.drop('Sales', axis=1)
         y = df['Sales']
 
         X = sm.add_constant(X)
-        X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=.3, train_size=None, random_state=1, 
-                                                            shuffle=True, stratify=None)
-        ols_m = sm.OLS(y_train,X_train).fit()
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.3, random_state=1, shuffle=True, stratify=None)
+        ols_m = sm.OLS(y_train, X_train).fit()
+
         print(ols_m.summary())
+
         y_pred = ols_m.predict(X_test)
-        mse = mean_squared_error(y_test,y_pred)
-        mae = mean_absolute_error(y_test,y_pred)
+        mse = mean_squared_error(y_test, y_pred)
+        mae = mean_absolute_error(y_test, y_pred)
         y_avg = y.mean()
+
         print("y average:", y_avg)
-        print("MSE:",mse)
+        print("MSE:", mse)
         print("SQRT MSE:", np.sqrt(mse))
-        print("MAE:",mae)
+        print("MAE:", mae)
         
     
     with regression:
