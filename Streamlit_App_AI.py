@@ -287,6 +287,8 @@ def machine_learning_page():
 
         elif selected_supervised_model == "Decision Tree":
             st.write("Here is the code for Decision Tree")
+        elif selected_supervised_model == "Random Forest":
+            st.write("Here is the code for Random Forest")
         elif selected_supervised_model == "GBM":
             st.write("Here is the code for GBM")
 
@@ -324,7 +326,7 @@ def machine_learning_page():
                 'device': ['gpu']}
 
             # Create RandomSearch object                
-            random_search = RandomizedSearchCV(clf,param_distributions=param_grid, n_iter=50, scoring='accuracy', n_jobs=1, cv=5,random_state=42)
+            random_search = RandomizedSearchCV(clf, param_distributions = param_grid, n_iter = 50, scoring = 'accuracy', n_jobs = 1, cv = 5, random_state = 42)
 
             # Fit the model
             random_search.fit(X_train, y_train)
@@ -402,8 +404,6 @@ def machine_learning_page():
             st.code(lightgbm_code, language = "python")
 
 
-        elif selected_supervised_model == "Random Forest":
-            st.write("Here is the code for Random Forest")
     
 def main():
     st.sidebar.title("Navigation")
