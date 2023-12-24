@@ -113,6 +113,16 @@ def basic_python_page():
         """
         st.code(import_code, language = "python")
 
+def statistical_learning_page():
+    st.title("Statistical Learning Algorithms")
+    tab_titles = ['Regression', 'Classification']
+    tab1, tab2 = st.tabs(tab_titles)
+    
+    with tab1:
+        st.write("tab for regression")
+    
+    with tab2:
+        st.write("tab for logistic regression")
 
     
 def machine_learning_page():
