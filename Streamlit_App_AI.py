@@ -62,7 +62,6 @@ def machine_learning_page():
     # Add content about machine learning algorithms and source code
 
 def main():
-
     st.sidebar.title("Navigation")
     pages = {
         "Homepage": homepage,
