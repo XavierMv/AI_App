@@ -1,14 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np 
-#import matplotlib.pyplot as plt
-from sklearn.datasets import make_regression
-from sklearn.linear_model import Ridge, Lasso
-from sklearn.metrics import mean_absolute_error, mean_squared_error
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score
-import scipy as sp
-import statsmodels.api as sm
 
 
 def homepage():
