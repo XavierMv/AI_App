@@ -66,38 +66,52 @@ def basic_python_page():
         install_code = """
         pip install numpy
         """
-        st.code(install_code, language="python")
+        st.code(install_code, language = "python")
 
         # Chunk of code for importing NumPy
         st.write("### Import NumPy")
         import_code = """
         import numpy as np
         """
-        st.code(import_code, language="python")
+        st.code(import_code, language = "python")
 
         # Chunk of code for basic operations with NumPy
         st.write("### Basic Operations with NumPy")
+        st.write("See how you can use python for basic mathematical operations with numpy bult-in functions.")
         operations_code = """
-        # Create a NumPy array
+        # Let's start by creating a numpy array.
         arr = np.array([1, 2, 3, 4, 5])
 
-        # Print the array
-        print("Original Array:", arr)
+        # Print the array to see the information that is embedded in it.
+        print(arr)
 
-        # Calculate the mean
+        # Calculate the mean of the array
         mean_value = np.mean(arr)
         print("Mean:", mean_value)
 
-        # Calculate the sum
+        # Calculate the sum of the array
         sum_value = np.sum(arr)
         print("Sum:", sum_value)
         """
-        st.code(operations_code, language="python")
+        st.code(operations_code, language = "python")
 
 
     with tab2:
         st.header('Pandas')
         st.write('As a first step install and import pandas for usage')
+        st.write("Run the first commmand on your terminal and add the next chunk of code on the top of your script.")
+
+        install_code = """
+        pip install pandas
+        """
+        st.code(install_code, language = "python")
+
+        # Chunk of code for importing NumPy
+        st.write("### Import Pandas")
+        import_code = """
+        import pandas as pd
+        """
+        st.code(import_code, language = "python")
 
 
     
