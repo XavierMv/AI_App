@@ -1,6 +1,14 @@
 import streamlit as st
 import pandas as pd
 import numpy as np 
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_regression
+from sklearn.linear_model import Ridge, Lasso
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score
+import scipy as sp
+import statsmodels.api as sm
 
 
 def homepage():
@@ -120,12 +128,99 @@ def statistical_learning_page():
 
     with GO:
         st.write("tab for General Overview")
+
+        st.markdown(
+            """
+            Statistical learning is a mathematical approach for supervised learning models. In supervised learning models, 
+            we have two types of features:
+                - Independent features (denoted by X values): These features aim to explain and provide insight into the
+                dependent feature.
+                - Dependent feature (denoted by Y): This feature is the one we are trying to predict/estimate based on the
+                other features.
+
+            This statistical approach involves conducting a series of parametric tests to ensure the performance and
+            reliability of the model for prediction. The model can be fitted with different probability distributions
+            depending on the type of answer we are seeking. For the purpose of this app, we will use the regression model
+            that assumes normality and logistic regression, which assumes fitness from the binomial distribution.
+
+            In statistical learning models, it is necessary to split the dataset into training and testing sets due to the
+            continuous validation of parameters throughout the model-building steps. 
+
+            The regression equation is denoted as follows:
+
+            """)
+        
+        regression_equation = r"Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \varepsilon"
+        st.latex(regression_equation)
+
+        st.write("Let's start by importing certain libraries and functions that will help us in further steps")        
+        libraries_rm = """
+        import matplotlib.pyplot as plt
+        import numpy as np
+        import pandas as pd
+        from sklearn.datasets import make_regression
+        from sklearn.linear_model import Ridge, Lasso
+        from sklearn.metrics import mean_absolute_error, mean_squared_error
+        from sklearn.model_selection import train_test_split
+        from sklearn.metrics import r2_score
+        import scipy as sp
+        import statsmodels.api as sm
+        """
+        st.code(libraries_rm, language = "python")
+
+        st.write("Split the model into training and testing and add the constant value")
+        split_rm = """
+        X = sm.add_constant(X)
+        X_train,X_test,y_train, y_test = train_test_split(X,y,test_size=.3, train_size=None, random_state=1, 
+                                                          shuffle=True, stratify=None)
+        """
+        st.code(split_rm, language = "python")
+
+        st.write("Train the model and get a summary table for model evaluation")
+        st.markdown("""
+        The following evaluation will
+        """)
+        split_rm = """
+        ols_m = sm.OLS(y_train,X_train).fit()
+        print(ols_m.summary())
+        y_pred = ols_m.predict(X_test)
+        mse = mean_squared_error(y_test,y_pred)
+        mae = mean_absolute_error(y_test,y_pred)
+        y_avg = y.mean()
+        print("y average:", y_avg)
+        print("MSE:",mse)
+        print("SQRT MSE:", np.sqrt(mse))
+        print("MAE:",mae)
+        """
+        st.code(split_rm, language = "python")
+
+        url = "https://raw.githubusercontent.com/datasets/sales-of-shampoo-over-a-three-yea/master/sales-of-shampoo-over-a-three-yea.csv"
+        df = pd.read_csv(url)
+
+        X = df.drop('Sales',axis=1)
+        y = df['Sales']
+
+        X = sm.add_constant(X)
+        X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=.3, train_size=None, random_state=1, 
+                                                            shuffle=True, stratify=None)
+        ols_m = sm.OLS(y_train,X_train).fit()
+        print(ols_m.summary())
+        y_pred = ols_m.predict(X_test)
+        mse = mean_squared_error(y_test,y_pred)
+        mae = mean_absolute_error(y_test,y_pred)
+        y_avg = y.mean()
+        print("y average:", y_avg)
+        print("MSE:",mse)
+        print("SQRT MSE:", np.sqrt(mse))
+        print("MAE:",mae)
+        
     
     with regression:
-        st.write("tab for regression")
+        st.write("## Regression Analysis")
+
     
     with classification:
-        st.write("tab for logistic regression")
+        st.write("## Logistic Regression")
 
     
 def machine_learning_page():
