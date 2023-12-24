@@ -33,6 +33,11 @@ def homepage():
         sets, and delivering actionable insights to clients. I also contributed to the development of innovative AI
         solutions tailored to the specific needs of diverse industries.
 
+        My educational background includes studies in Actuarial Sciences and financial engineering at Universidad
+        Anáhuac México. Currently, I am pursuing a Master of Management in Artificial Intelligence at Queen's University.
+        This academic journey has provided me with a solid foundation in both traditional and cutting-edge techniques
+        in the fields of finance and artificial intelligence.
+
         I am passionate about the intersection of data science and business strategy, and I am excited to share my
         knowledge with you through this Streamlit app.
         """
