@@ -6,7 +6,7 @@ import numpy as np
 def homepage():
     st.title("Welcome to My Streamlit App")
     st.write(
-        "Hello and welcome to my Streamlit app! My goal is to provide you with "
+        "My goal is to provide you with "
         "basic knowledge on how to use Python for AI and business applications."
     )
 
@@ -115,8 +115,11 @@ def basic_python_page():
 
 def statistical_learning_page():
     st.title("Statistical Learning Algorithms")
-    tab_titles_sl = ['Regression', 'Classification']
-    regression, classification = st.tabs(tab_titles_sl)
+    tab_titles_sl = ['General Overview', 'Regression', 'Classification']
+    GO, regression, classification = st.tabs(tab_titles_sl)
+
+    with GO:
+        st.write("tab for General Overview")
     
     with regression:
         st.write("tab for regression")
@@ -127,10 +130,13 @@ def statistical_learning_page():
     
 def machine_learning_page():
     st.title("Machine Learning Algorithms")
-    tab_titles = ['Unsupervised', 'Supervised']
-    tab1, tab2 = st.tabs(tab_titles)
+    tab_titles = ['General Overview', 'Unsupervised', 'Supervised']
+    GOML, Unsupervised, Supervised = st.tabs(tab_titles)
 
-    with tab1:
+    with GOML:
+        st.write("General Overview")
+
+    with Unsupervised:
         st.write("Let's create a simple unsupervised machine learning model using the Iris dataset.")
         selected_algorithm = st.selectbox("Select an Unsupervised Machine Learning Algorithm", ["K-Means", "Hierarchical Clustering"])
         if selected_algorithm == "K-Means":
@@ -138,7 +144,7 @@ def machine_learning_page():
         elif selected_algorithm == "Hierarchical Clustering":
             st.write("Here is the code for Hierarchical Clustering")
 
-    with tab2:
+    with Supervised:
         st.write("Let's explore Supervised Machine Learning.")
         selected_supervised_model = st.selectbox("Select a Supervised Machine Learning Model", ["Ridge", "Lasso", "LDA", "SVM", "Decision Tree", "Random Forest", "GBM", "XGBM", "LightGBM"])
         if selected_supervised_model == "Ridge":
