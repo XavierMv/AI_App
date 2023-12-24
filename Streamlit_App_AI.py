@@ -420,6 +420,7 @@ def main():
     pages = {
         "Homepage": homepage,
         "Basic Python": basic_python_page,
+        "Statistical Learning": statistical_learning_page,
         "Machine Learning": machine_learning_page,
     }
 
