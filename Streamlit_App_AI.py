@@ -115,13 +115,13 @@ def basic_python_page():
 
 def statistical_learning_page():
     st.title("Statistical Learning Algorithms")
-    tab_titles = ['Regression', 'Classification']
-    tab1, tab2 = st.tabs(tab_titles)
+    tab_titles_sl = ['Regression', 'Classification']
+    regression, classification = st.tabs(tab_titles_sl)
     
-    with tab1:
+    with regression:
         st.write("tab for regression")
     
-    with tab2:
+    with classification:
         st.write("tab for logistic regression")
 
     
