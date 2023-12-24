@@ -63,12 +63,9 @@ def basic_python_page():
         st.write('As a first step install and import numpy for usage')
         st.write("Run the first commmand on your terminal and add the next chunk of code on the top of your script.")
 
-        code_install = """
-        pip install numpy
-        """
-
-
-        st.code_install(code_install, language = "python")
+        code = '''def hello():
+        print("Hello, Streamlit!")'''
+        st.code(code, language='python')
 
 
     with tab2:
