@@ -87,7 +87,7 @@ def main():
 
     st.sidebar.title("Navigation")
     pages = {
-        "Introduction": introduction_page,
+        "Introduction": homepage,
         "Basic Python": basic_python_page,
         "Machine Learning": machine_learning_page,
     }
