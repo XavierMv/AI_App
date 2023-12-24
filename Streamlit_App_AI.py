@@ -389,8 +389,8 @@ def machine_learning_page():
             print("Accuracy on Test Set:", accuracy)
 
             # Performance Metrics
-            print("Confusion Matrix:\n", confusion_matrix(y_test, pred))
-            print("Classification Report:\n", classification_report(y_test, pred))
+            print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+            print("Classification Report:\n", classification_report(y_test, y_pred))
 
             """
             st.code(svm_code, language = "python")
