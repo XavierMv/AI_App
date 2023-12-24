@@ -117,9 +117,10 @@ def basic_python_page():
     
 def machine_learning_page():
     st.title("Machine Learning Algorithms")
-    selected_approach = st.selectbox("Select a Machine Learning Approach", ["Unsupervised", "Supervised"])
+    tab_titles = ['Unsupervised', 'Supervised']
+    tab1, tab2 = st.tabs(tab_titles)
 
-    if selected_approach == "Unsupervised":
+    with tab1:
         st.write("Let's create a simple unsupervised machine learning model using the Iris dataset.")
         selected_algorithm = st.selectbox("Select an Unsupervised Machine Learning Algorithm", ["K-Means", "Hierarchical Clustering"])
         if selected_algorithm == "K-Means":
@@ -127,7 +128,7 @@ def machine_learning_page():
         elif selected_algorithm == "Hierarchical Clustering":
             st.write("Here is the code for Hierarchical Clustering")
 
-    elif selected_approach == "Supervised":
+    with tab2:
         st.write("Let's explore Supervised Machine Learning.")
         selected_supervised_model = st.selectbox("Select a Supervised Machine Learning Model", ["Ridge", "Lasso"])
         if selected_supervised_model == "Ridge":
