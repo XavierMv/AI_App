@@ -123,6 +123,7 @@ def statistical_learning_page():
             """
             Statistical learning is a mathematical approach for supervised learning models. In supervised learning models, 
             we have two types of features:
+            
                 - Independent features (denoted by X values): These features aim to explain and provide insight into the
                 dependent feature.
                 - Dependent feature (denoted by Y): This feature is the one we are trying to predict/estimate based on the
@@ -137,6 +138,7 @@ def statistical_learning_page():
             continuous validation of parameters throughout the model-building steps. 
 
             It is important that you follow the following steps for model evaluation:
+
                 1. Plot each dependent feature to the independent feature to understand the function
                 2. Look at summary table (F-statistic, features' p-values, normality test, Autocorrelation test, r-squared, and adjusted r-squared)
                 3. Look for qq-plot and normality test
@@ -180,6 +182,7 @@ def statistical_learning_page():
         st.write("Train the model and get a summary table for model evaluation")
         st.markdown("""
         The following evaluation will be separated into steps:
+                    
                     - Look for the p-value of the F-statistic to be less than 0.05 to ensure your model is valid
                     - Review the p-values of each feature introduced in the model. Every feature most be under 0.05 or be removed 
                     due to lack of contribution to the model prediction
@@ -202,7 +205,7 @@ def statistical_learning_page():
 
         st.write("""
         Create a qq-plot to make sure the residuals do have a normal distribution, you can apply normality tests 
-        to your analysis (Anderson-Darling, Shapiro-Wilks, among others)
+        to your analysis (Anderson-Darling, Shapiro-Wilks, among others).
         """)
 
         qqplot_rm = """
@@ -229,7 +232,7 @@ def statistical_learning_page():
         # Anderson-Darling test
         from scipy.stats import anderson
 
-        result = anderson(data)
+        result = anderson(error)
 
         print("Test Statistic: ", result.statistic)
         
