@@ -136,6 +136,13 @@ def statistical_learning_page():
             In statistical learning models, it is necessary to split the dataset into training and testing sets due to the
             continuous validation of parameters throughout the model-building steps. 
 
+            It is important that you follow the following steps for model evaluation:
+                1. Plot each dependent feature to the independent feature to understand the function
+                2. Look at summary table (F-statistic, features' p-values, normality test, Autocorrelation test, r-squared, and adjusted r-squared)
+                3. Look for qq-plot and normality test
+                4. Look for homocedasticity (constant variance among residuals)
+                5. Look for FIV values (the threshold depends on the business requirement)
+
             The regression equation is denoted as follows:
 
             """)
@@ -172,7 +179,12 @@ def statistical_learning_page():
 
         st.write("Train the model and get a summary table for model evaluation")
         st.markdown("""
-        The following evaluation will
+        The following evaluation will be separated into steps:
+                    - Look for the p-value of the F-statistic to be less than 0.05 to ensure your model is valid
+                    - Review the p-values of each feature introduced in the model. Every feature most be under 0.05 or be removed 
+                    due to lack of contribution to the model prediction
+                    - Look for the Durbin-Watson test for non-autocorrelation. We are looking for a value around 2
+                    - Look for the r-squared to understand the proportion of variance that's being explained.
         """)
         split_rm = """
         ols_m = sm.OLS(y_train,X_train).fit()
@@ -188,6 +200,47 @@ def statistical_learning_page():
         """
         st.code(split_rm, language = "python")
 
+        st.write("""
+        Create a qq-plot to make sure the residuals do have a normal distribution, you can apply normality tests 
+        to your analysis (Anderson-Darling, Shapiro-Wilks, among others)
+        """)
+
+        qqplot_rm = """
+        error = y_test-y_pred
+        fig, ax = plt.subplots(figsize=(4,4),dpi=100)
+        _=sp.stats.probplot(error,plot=ax)
+        """
+
+        st.code(qqplot_rm, language = "python")
+
+        normality_rm = """
+
+        # Shapiro-Wilks test
+        from scipy.stats import shapiro
+
+        stat, p_value = shapiro(error)
+
+        if p_value > 0.05:
+            print("There's normality")
+        else:
+            print("There's no normality")
+
+        
+        # Anderson-Darling test
+        from scipy.stats import anderson
+
+        result = anderson(data)
+
+        print("Test Statistic: ", result.statistic)
+        
+        """
+
+        st.code(normality_rm, language = "python")
+
+        st.write("""
+        Once you have evaluated each test, make sure to make adjustments to the model with representative features 
+        and retrain it for performance improvement.
+        """)
         
         
 
