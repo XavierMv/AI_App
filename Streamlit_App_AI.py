@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np 
-
+from sklearn.datasets import fetch_california_housing
 
 def homepage():
     st.title("Welcome to My Streamlit App")
@@ -145,6 +145,10 @@ def statistical_learning_page():
         regression_equation = r"Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \varepsilon"
         st.latex(regression_equation)
 
+        
+    
+    with regression:
+        st.write("## Regression Analysis")
         st.write("Let's start by importing certain libraries and functions that will help us in further steps")        
         libraries_rm = """
         import matplotlib.pyplot as plt
@@ -186,14 +190,8 @@ def statistical_learning_page():
         """
         st.code(split_rm, language = "python")
 
-        url = "https://raw.githubusercontent.com/datasets/sales-of-shampoo-over-a-three-yea/master/sales-of-shampoo-over-a-three-yea.csv"
-        df = pd.read_csv(url)
-
-
-        
-    
-    with regression:
-        st.write("## Regression Analysis")
+        california_housing = fetch_california_housing()
+        st.write(california_housing.head())
 
     
     with classification:
