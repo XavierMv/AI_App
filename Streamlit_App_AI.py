@@ -258,7 +258,20 @@ def machine_learning_page():
     GOML, Unsupervised, Supervised = st.tabs(tab_titles)
 
     with GOML:
-        st.write("General Overview")
+        st.markdown("""
+        
+        Machine Learning is a part of AI, it takes the same logic from statistical learning models to create 
+        models that can be faster, run with less tests and enhance it's predictions. These type of models are less interpretable 
+        and more flexible, you can find 2 basic groups:
+        
+        - Unsupervised: These models do not have an objective feature Y, you're trying to find patterns in your data to create groups and explain them
+        - Supervised: These models do have an objective feature that can be either continous (Regression) or categorical (Classification)
+        
+        This type of models need to be divided on Train, Test, and Cross-Validation sets to ensure a good fit for the model.
+        All this models have a set of hyperparameters that need to change to enhance it's performance, this process is called hypertuning and can be 
+        hard to deliver on local computers, depending on the size of the dataset and the type of model you're trying to train.
+        
+        """)
 
     with Unsupervised:
         st.write("Let's create a simple unsupervised machine learning model using the Iris dataset.")
@@ -274,6 +287,7 @@ def machine_learning_page():
         if selected_supervised_model == "Ridge":
             st.write("Here is the code for Ridge")
             rdige_code = """
+
             import numpy as np
             import pandas as pd
             from sklearn.model_selection import GridSearchCV, train_test_split
@@ -377,6 +391,7 @@ def machine_learning_page():
         elif selected_supervised_model == "SVM":
             st.write("Here is the code for SVM")
             svm_code = """
+
             import sklearn
             from sklearn.svm import SVC
             from sklearn.metrics import confusion_matrix
@@ -436,6 +451,7 @@ def machine_learning_page():
         elif selected_supervised_model == "XGBM":
             st.write("Here is the code for XGBM")
             xgbm_code = """
+
             import pandas as pd
             import numpy as np
             import xgboost as xgb
@@ -491,6 +507,7 @@ def machine_learning_page():
         elif selected_supervised_model == "LightGBM":
             st.write("Here is the code for LightGBM")
             lightgbm_code = """
+
             import pandas as pd
             import numpy as np
             import lightgbm as lgb
