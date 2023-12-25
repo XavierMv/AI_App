@@ -274,13 +274,90 @@ def machine_learning_page():
         """)
 
     with Unsupervised:
-        st.write("Let's create a simple unsupervised machine learning model using the Iris dataset.")
+        
         selected_algorithm = st.selectbox("Select an Unsupervised Machine Learning Algorithm", ["K-Means", "Hierarchical Clustering"])
         if selected_algorithm == "K-Means":
-            st.write("Here is the code for K-Means")
-        elif selected_algorithm == "Hierarchical Clustering":
-            st.write("Here is the code for Hierarchical Clustering")
+            st.markdown("""
+            K-Means algorithm works through the following steps:
+                        
+            1. Scale the features
+            2. Create distance matrix (Confusion matrix is embedded on KMeans function from scikit-learn)
+            3. Evaluate optimal number of clusters through Elbow method & Silhouette method
+            4. Choose the optimal number of clusters and assess through business criteria
+            
+            """)
+            kmeans_code = """
+            # Import libraries
+            import pandas as pd
+            import numpy as np
+            from sklearn.preprocessing import StandardScaler
+            from sklearn.cluster import KMeans
+            from sklearn.metrics import silhouette_score
+            from sklearn.datasets import make_blobs
+            import matplotlib.pyplot as plt
 
+            
+            # Scale the data
+            scaler = StandardScaler()
+            X_scaled = scaler.fit_transform(X)
+
+            # Generate Elbow method
+            inertia_values = []
+            for k in range(1, 11):
+                kmeans = KMeans(n_clusters = k, random_state = 42)
+                kmeans.fit(X_scaled)
+                inertia_values.append(kmeans.inertia_)
+
+            # Plot Elbow method
+            plt.plot(range(1, 11), inertia_values, marker = 'o')
+            plt.title('Elbow Method for Optimal k')
+            plt.xlabel('Number of Clusters (k)')
+            plt.ylabel('Inertia')
+            plt.show()
+
+            # Generate Silhouette method
+            silhouette_scores = []
+            for k in range(2, 11):
+                kmeans = KMeans(n_clusters = k, random_state = 42)
+                labels = kmeans.fit_predict(X_scaled)
+                silhouette_scores.append(silhouette_score(X_scaled, labels))
+
+            # Plot Silhouette method
+            plt.plot(range(2, 11), silhouette_scores, marker = 'o')
+            plt.title('Silhouette Method for Optimal k')
+            plt.xlabel('Number of Clusters (k)')
+            plt.ylabel('Silhouette Score')
+            plt.show()
+
+            # Select the optimal number of clusters for the final model
+            k = 4
+            kmeans_final = KMeans(n_clusters = final_k, random_state = 42)
+            labels = kmeans_final.fit_predict(X_scaled)
+
+            # Visualize the clusters
+            plt.scatter(X_scaled[:, 0], X_scaled[:, 1], c = labels, cmap = 'viridis', edgecolor = 'k')
+            plt.scatter(kmeans_final.cluster_centers_[:, 0], kmeans_final.cluster_centers_[:, 1], c = 'red', marker = 'X', s = 200)
+            plt.title("KMeans Clustering with k = ", k)
+            plt.xlabel('Feature 1 (Scaled)')
+            plt.ylabel('Feature 2 (Scaled)')
+            plt.show()
+
+            """
+
+        elif selected_algorithm == "Hierarchical Clustering":
+            st.markdown("""
+            Hierarchical Clustering algorithm works through the following steps:
+                        
+            1. Scale the features
+            2. Computing linkage matrix
+                - Ward: Minimize the variance within the instances from the cluster
+                - Complete: Distance between clusters is the maximum distance between individual instances
+                - Single: Distance between clusters is the minimum distance between individual instances
+                - Average: Distance between clusters is the average distance between individual instances
+            3. Evaluate optimal number of clusters through Elbow method & Silhouette method
+            4. Choose the optimal number of clusters and assess through business criteria
+            
+            """)
     with Supervised:
         st.write("Let's explore Supervised Machine Learning.")
         selected_supervised_model = st.selectbox("Select a Supervised Machine Learning Model", ["Ridge", "Lasso", "LDA", "SVM", "Decision Tree", "Random Forest", "GBM", "XGBM", "LightGBM"])
@@ -297,7 +374,7 @@ def machine_learning_page():
             from sklearn.preprocessing import StandardScaler
 
             # Assuming you have your dataset X and y
-            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3)
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42)
 
             # Standardize features
             scaler = StandardScaler()
@@ -348,7 +425,7 @@ def machine_learning_page():
             from sklearn.preprocessing import StandardScaler
 
             # Assuming you have your dataset X and y
-            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3)
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42)
 
             # Standardize features
             scaler = StandardScaler()
@@ -389,7 +466,51 @@ def machine_learning_page():
 
         elif selected_supervised_model == "LDA":
             st.write("Here is the code for LDA")
+            lda_code = """
+            # Import libraries
+            import pandas as pd
+            import numpy as np
+            from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+            from sklearn.model_selection import GridSearchCV, train_test_split
+            from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
+            # Assuming you have your dataset X and y
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42)
+
+            # Define the Linear Discriminant Analysis model
+            lda_model = LinearDiscriminantAnalysis()
+
+            # Define the hyperparameter grid for GridSearchCV
+            param_grid = {
+                'solver': ['svd', 'lsqr', 'eigen'],
+                'shrinkage': [None, 'auto'],
+                'n_components': [None, 1, 2],  # Number of components for dimensionality reduction
+            }
+
+            # Create GridSearchCV object
+            grid_search = GridSearchCV(estimator = lda_model, param_grid = param_grid, scoring = 'accuracy', cv = 5)
+
+            # Fit the model
+            grid_search.fit(X_train, y_train)
+
+            # Get the best hyperparameters
+            best_params = grid_search.best_params_
+            print("Best Hyperparameters:", best_params)
+
+            # Get the best model
+            best_model = grid_search.best_estimator_
+
+            # Evaluate the best model on test data
+            y_pred = best_model.predict(X_test)
+            accuracy = accuracy_score(y_test, y_pred)
+            print("Accuracy on Test Set:", accuracy)
+
+            # Performance Metrics
+            print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+            print("Classification Report:\n", classification_report(y_test, y_pred))
+            """
+
+            st.code(lda_code, language = "python")
 
         elif selected_supervised_model == "SVM":
             st.write("Here is the code for SVM")
@@ -418,7 +539,7 @@ def machine_learning_page():
             }
 
             # Create GridSearchCV object
-            grid_search = GridSearchCV(estimator=svm_model, param_grid=param_grid, scoring='accuracy', cv=5)
+            grid_search = GridSearchCV(estimator = svm_model, param_grid = param_grid, scoring = 'accuracy', cv = 5)
 
             # Fit the model
             grid_search.fit(X_train_scaled, y_train)
@@ -447,10 +568,153 @@ def machine_learning_page():
 
         elif selected_supervised_model == "Decision Tree":
             st.write("Here is the code for Decision Tree")
+            DT_code = """
+            import pandas as pd
+            import numpy as np
+            from sklearn.tree import DecisionTreeClassifier
+            from sklearn.model_selection import RandomizedSearchCV, train_test_split
+            from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+            # Assuming you have your dataset X and y
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42)
+
+            # Define the Decision Tree model
+            dt_model = DecisionTreeClassifier()
+
+            # Define the hyperparameter grid for Random Search
+            param_grid = {
+                'criterion': ['gini', 'entropy'],
+                'splitter': ['best', 'random'],
+                'max_depth': np.arange(1, 21),
+                'min_samples_split': np.arange(2, 11),
+                'min_samples_leaf': np.arange(1, 11),
+                'max_features': [None, 'auto', 'sqrt', 'log2'],
+            }
+
+            # Create Random Search object
+            random_search = RandomizedSearchCV(estimator = dt_model, param_distributions = param_grid, scoring = 'accuracy', cv = 5, n_iter = 50, random_state = 42)
+
+            # Fit the model
+            random_search.fit(X_train, y_train)
+
+            # Get the best hyperparameters
+            best_params = random_search.best_params_
+            print("Best Hyperparameters:", best_params)
+
+            # Get the best model
+            best_model = random_search.best_estimator_
+
+            # Evaluate the best model on test data
+            y_pred = best_model.predict(X_test)
+            accuracy = accuracy_score(y_test, y_pred)
+            print("Accuracy on Test Set:", accuracy)
+
+            # Performance Metrics
+            print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+            print("Classification Report:\n", classification_report(y_test, y_pred))
+
+            """
+            st.code(DT_code, language = "python")
+
         elif selected_supervised_model == "Random Forest":
             st.write("Here is the code for Random Forest")
+            rf_code = """
+            import pandas as pd
+            import numpy as np
+            from sklearn.ensemble import RandomForestClassifier
+            from sklearn.model_selection import RandomizedSearchCV, train_test_split
+            from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+            # Assuming you have your dataset X and y
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42)
+
+            # Define the Random Forest model
+            rf_model = RandomForestClassifier()
+
+            # Define the hyperparameter grid for Random Search
+            param_grid = {
+                'n_estimators': np.arange(50, 251, 20),
+                'criterion': ['gini', 'entropy'],
+                'max_depth': np.arange(1, 21),
+                'min_samples_split': np.arange(2, 11),
+                'min_samples_leaf': np.arange(1, 11),
+                'max_features': ['auto', 'sqrt', 'log2'],
+                'bootstrap': [True, False],
+            }
+
+            # Create Random Search object
+            random_search = RandomizedSearchCV(estimator = rf_model, param_distributions = param_grid, scoring = 'accuracy', cv = 5, n_iter = 50, random_state = 42)
+
+            # Fit the model
+            random_search.fit(X_train, y_train)
+
+            # Get the best hyperparameters
+            best_params = random_search.best_params_
+            print("Best Hyperparameters:", best_params)
+
+            # Get the best model
+            best_model = random_search.best_estimator_
+
+            # Evaluate the best model on test data
+            y_pred = best_model.predict(X_test)
+            accuracy = accuracy_score(y_test, y_pred)
+            print("Accuracy on Test Set:", accuracy)
+
+            # Performance Metrics
+            print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+            print("Classification Report:\n", classification_report(y_test, y_pred))
+
+            """
+
+            st.code(rf_code, language = "python")
+
         elif selected_supervised_model == "GBM":
             st.write("Here is the code for GBM")
+            gbm_code = """
+            import pandas as pd
+            import numpy as np
+            from sklearn.ensemble import GradientBoostingClassifier
+            from sklearn.model_selection import RandomizedSearchCV, train_test_split
+            from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+            # Assuming you have your dataset X and y for classification
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42)
+
+            # Define the GBM model
+            gbm_model = GradientBoostingClassifier()
+
+            # Define the hyperparameter grid for RandomizedSearchCV
+            param_grid = {
+                'n_estimators': np.arange(50, 200, 10),
+                'learning_rate': np.logspace(-3, 0, 4),
+                'max_depth': np.arange(3, 10),
+                'min_samples_split': np.arange(2, 10),
+                'min_samples_leaf': np.arange(1, 10),
+            }
+
+            # Create RandomizedSearchCV object
+            random_search = RandomizedSearchCV(estimator = gbm_model, param_distributions = param_grid, n_iter = 50, scoring = 'accuracy', cv = 5, random_state = 42)
+
+            # Fit the model
+            random_search.fit(X_train, y_train)
+
+            # Get the best hyperparameters
+            best_params = random_search.best_params_
+            print("Best Hyperparameters:", best_params)
+
+            # Get the best model
+            best_model = random_search.best_estimator_
+
+            # Evaluate the best model on test data
+            y_pred = best_model.predict(X_test)
+            accuracy = accuracy_score(y_test, y_pred)
+
+            print("Accuracy on Test Set:", accuracy)
+            print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+            print("Classification Report:\n", classification_report(y_test, y_pred))
+
+            """
+            st.code(gbm_code, language = "python")
 
 
         elif selected_supervised_model == "XGBM":
