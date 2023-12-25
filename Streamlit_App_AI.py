@@ -288,6 +288,7 @@ def machine_learning_page():
             st.write("Here is the code for Ridge")
             rdige_code = """
 
+            # Import libraries
             import numpy as np
             import pandas as pd
             from sklearn.model_selection import GridSearchCV, train_test_split
@@ -337,6 +338,8 @@ def machine_learning_page():
         elif selected_supervised_model == "Lasso":
             st.write("Here is the code for Lasso")
             lasso_code = """
+
+            # Import libraries
             import numpy as np
             import pandas as pd
             from sklearn.model_selection import GridSearchCV, train_test_split
@@ -392,7 +395,7 @@ def machine_learning_page():
             st.write("Here is the code for SVM")
             svm_code = """
 
-
+            # Import libraries
             import sklearn
             from sklearn.svm import SVC
             from sklearn.metrics import confusion_matrix
@@ -454,7 +457,7 @@ def machine_learning_page():
             st.write("Here is the code for XGBM")
             xgbm_code = """
 
-
+            # Import libraries
             import pandas as pd
             import numpy as np
             import xgboost as xgb
@@ -512,7 +515,7 @@ def machine_learning_page():
             st.write("Here is the code for LightGBM")
             lightgbm_code = """
 
-
+            # Import libraries
             import pandas as pd
             import numpy as np
             import lightgbm as lgb
