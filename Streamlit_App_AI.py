@@ -392,6 +392,7 @@ def machine_learning_page():
             st.write("Here is the code for SVM")
             svm_code = """
 
+
             import sklearn
             from sklearn.svm import SVC
             from sklearn.metrics import confusion_matrix
@@ -436,6 +437,7 @@ def machine_learning_page():
             print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
             print("Classification Report:\n", classification_report(y_test, y_pred))
 
+
             """
             st.code(svm_code, language = "python")
 
@@ -451,6 +453,7 @@ def machine_learning_page():
         elif selected_supervised_model == "XGBM":
             st.write("Here is the code for XGBM")
             xgbm_code = """
+
 
             import pandas as pd
             import numpy as np
@@ -501,12 +504,14 @@ def machine_learning_page():
             print("Confusion Matrix:\n", confusion_matrix(y_test, pred))
             print("Classification Report:\n", classification_report(y_test, pred))
 
+
             """
             st.code(xgbm_code, language = "python")
 
         elif selected_supervised_model == "LightGBM":
             st.write("Here is the code for LightGBM")
             lightgbm_code = """
+
 
             import pandas as pd
             import numpy as np
@@ -556,6 +561,7 @@ def machine_learning_page():
             # Performance Metrics
             print("Confusion Matrix:\n", confusion_matrix(y_test, pred))
             print("Classification Report:\n", classification_report(y_test, pred))
+
 
             """
             st.code(lightgbm_code, language = "python")
