@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np 
-from sklearn.datasets import fetch_california_housing
+import sklearn as sk
 
 def homepage():
     st.title("Welcome to My Streamlit App")
@@ -188,7 +188,7 @@ def statistical_learning_page():
         """
         st.code(split_rm, language = "python")
 
-        california_housing = fetch_california_housing()
+        california_housing = sk.datasets.fetch_california_housing()
         
 
     
