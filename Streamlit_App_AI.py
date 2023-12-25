@@ -277,6 +277,7 @@ def machine_learning_page():
         
         selected_algorithm = st.selectbox("Select an Unsupervised Machine Learning Algorithm", ["K-Means", "Hierarchical Clustering"])
         if selected_algorithm == "K-Means":
+            
             st.markdown("""
             K-Means algorithm works through the following steps:
                         
@@ -286,6 +287,7 @@ def machine_learning_page():
             4. Choose the optimal number of clusters and assess through business criteria
             
             """)
+
             kmeans_code = """
             # Import libraries
             import pandas as pd
@@ -361,7 +363,7 @@ def machine_learning_page():
             
             """)
 
-            
+
     with Supervised:
         st.write("Let's explore Supervised Machine Learning.")
         selected_supervised_model = st.selectbox("Select a Supervised Machine Learning Model", ["Ridge", "Lasso", "LDA", "SVM", "Decision Tree", "Random Forest", "GBM", "XGBM", "LightGBM"])
