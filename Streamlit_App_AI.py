@@ -344,6 +344,8 @@ def machine_learning_page():
 
             """
 
+            st.code(kmeans_code, language = "python")
+
         elif selected_algorithm == "Hierarchical Clustering":
             st.markdown("""
             Hierarchical Clustering algorithm works through the following steps:
@@ -358,6 +360,8 @@ def machine_learning_page():
             4. Choose the optimal number of clusters and assess through business criteria
             
             """)
+
+            
     with Supervised:
         st.write("Let's explore Supervised Machine Learning.")
         selected_supervised_model = st.selectbox("Select a Supervised Machine Learning Model", ["Ridge", "Lasso", "LDA", "SVM", "Decision Tree", "Random Forest", "GBM", "XGBM", "LightGBM"])
