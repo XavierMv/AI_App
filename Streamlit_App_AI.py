@@ -182,11 +182,12 @@ def statistical_learning_page():
         st.write("Train the model and get a summary table for model evaluation")
         st.markdown("""
         The following evaluation will be separated into steps:
-                    
+            
             - Look for the p-value of the F-statistic to be less than 0.05 to ensure your model is valid
             - Review the p-values of each feature introduced in the model. Every feature most be under 0.05 or be removed due to lack of contribution to the model prediction
             - Look for the Durbin-Watson test for non-autocorrelation. We are looking for a value around 2
             - Look for the r-squared to understand the proportion of variance that's being explained.
+            
         """)
         split_rm = """
         ols_m = sm.OLS(y_train,X_train).fit()
