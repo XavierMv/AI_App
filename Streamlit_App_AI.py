@@ -189,7 +189,7 @@ def statistical_learning_page():
         st.code(split_rm, language = "python")
 
         california_housing = fetch_california_housing()
-        st.write(california_housing.head())
+        
 
     
     with classification:
