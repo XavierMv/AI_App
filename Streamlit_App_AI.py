@@ -119,8 +119,6 @@ def statistical_learning_page():
     GO, regression, classification = st.tabs(tab_titles_sl)
 
     with GO:
-        st.write("tab for General Overview")
-
         st.markdown(
             """
             Statistical learning is a mathematical approach for supervised learning models. In supervised learning models, 
