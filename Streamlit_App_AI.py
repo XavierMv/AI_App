@@ -123,7 +123,7 @@ def statistical_learning_page():
             """
             Statistical learning is a mathematical approach for supervised learning models. In supervised learning models, 
             we have two types of features:
-            
+
                 - Independent features (denoted by X values): These features aim to explain and provide insight into the
                 dependent feature.
                 - Dependent feature (denoted by Y): This feature is the one we are trying to predict/estimate based on the
@@ -183,11 +183,10 @@ def statistical_learning_page():
         st.markdown("""
         The following evaluation will be separated into steps:
                     
-                    - Look for the p-value of the F-statistic to be less than 0.05 to ensure your model is valid
-                    - Review the p-values of each feature introduced in the model. Every feature most be under 0.05 or be removed 
-                    due to lack of contribution to the model prediction
-                    - Look for the Durbin-Watson test for non-autocorrelation. We are looking for a value around 2
-                    - Look for the r-squared to understand the proportion of variance that's being explained.
+            - Look for the p-value of the F-statistic to be less than 0.05 to ensure your model is valid
+            - Review the p-values of each feature introduced in the model. Every feature most be under 0.05 or be removed due to lack of contribution to the model prediction
+            - Look for the Durbin-Watson test for non-autocorrelation. We are looking for a value around 2
+            - Look for the r-squared to understand the proportion of variance that's being explained.
         """)
         split_rm = """
         ols_m = sm.OLS(y_train,X_train).fit()
