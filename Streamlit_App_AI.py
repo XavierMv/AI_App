@@ -62,7 +62,12 @@ def basic_programming():
         st.header('General Overview')
 
         st.markdown("""
-        TBD
+        Welcome to a foundational section on data manipulation! Mastering basic programming commands in R and Python 
+        is a crucial step before diving into AI and advanced data manipulation. The provided code snippets will be 
+        essential in upcoming sections, empowering you to explore statistical analyses and AI applications. 
+        Understanding these fundamentals is a strategic investment, unlocking the potential of your data science 
+        journey. Let's delve into the synergy between programming and the dynamic fields of statistics and AI, propelling 
+        your skills to new heights!
         """)
         
 
@@ -241,15 +246,15 @@ def basic_programming():
                 x = np.random.rand(10) * 100
                 t = random.choices(x, k=5)
                 y = np.arange(10, 0, -1)
-                z
-                w
-                x
-                t
-                y
+                print(z)
+                print(w)
+                print(x)
+                print(t)
+                print(y)
 
                 # Let's create a matrix of 4 columns and 10 rows with vectors (x,z,w,y)
-                mat <- np.column_stack((x, z, w, y))
-                mat
+                mat = np.column_stack((x, z, w, y))
+                print(mat)
                 """
 
                 st.code(v_m_py, language = "python")
@@ -310,6 +315,25 @@ def basic_programming():
                 """
                 st.code(tidy_r, language = "python")
 
+                st.write("Work with dataframes")
+                dfm_r = """
+                # Declare vectors through different commands
+                z <- 1:10
+                w <- c(4,2,5,7,8,9,0,3,2,6)
+                x <- runif(10)*100
+                y <- seq(from=10, to=1, by=-1)
+
+                # Create a matrix from the previous vectors
+                mat <- matrix(data= c(x,z,w,y), ncol = 4, nrow = 10)
+                colnames(mat) <- c("x","z","w","y")
+                mat
+
+                # Turn it into a dataframe
+                df <- data.frame(mat) 
+                df
+                """
+                st.code(dfm_r, language = "python")
+
 
 
             elif selected_language == "Python":
@@ -328,6 +352,24 @@ def basic_programming():
                 import pandas as pd
                 """
                 st.code(import_pandas_py, language = "python")
+
+                st.write("Work with dataframes")
+                dfm_r = """
+                # Declare vectors through different commands
+                z = np.arange(1, 11)
+                w = np.array([4, 2, 5, 7, 8, 9, 0, 3, 2, 6])
+                x = np.random.rand(10) * 100
+                y = np.arange(10, 0, -1)
+
+                # Create a matrix from the previous vectors
+                mat = np.column_stack((x, z, w, y))
+
+                # Turn it into a dataframe
+                col_names = ["x", "z", "w", "y"]
+                df = pd.DataFrame(mat, columns=col_names)
+                print(df)
+                """
+                st.code(dfm_r, language = "python")
         
 
         
