@@ -53,65 +53,286 @@ def homepage():
     st.markdown("[Connect with Me on LinkedIn](https://www.linkedin.com/in/xaviermagana/)")
 
 
-def basic_python_page():
-    st.title("Basic Python Commands with Pandas and NumPy")
-    tab_titles = ['Numpy', 'Pandas']
+def basic_programming():
+    st.title("Basic programming with R and Python")
+    tab_titles = ['Overview', 'Coding']
     tab1, tab2 = st.tabs(tab_titles)
 
     with tab1:
-        st.header('Numpy')
-        st.write('As a first step install and import numpy for usage')
-        st.write("Run the first commmand on your terminal and add the next chunk of code on the top of your script.")
+        st.header('General Overview')
 
-        install_code = """
-        pip install numpy
-        """
-        st.code(install_code, language = "python")
-
-        # Chunk of code for importing NumPy
-        st.write("### Import NumPy")
-        import_code = """
-        import numpy as np
-        """
-        st.code(import_code, language = "python")
-
-        # Chunk of code for basic operations with NumPy
-        st.write("### Basic Operations with NumPy")
-        st.write("See how you can use python for basic mathematical operations with numpy bult-in functions.")
-        operations_code = """
-        # Let's start by creating a numpy array.
-        arr = np.array([1, 2, 3, 4, 5])
-
-        # Print the array to see the information that is embedded in it.
-        print(arr)
-
-        # Calculate the mean of the array
-        mean_val = np.mean(arr)
-        print("Mean:", mean_val)
-
-        # Calculate the sum of the array
-        sum_val = np.sum(arr)
-        print("Sum:", sum_val)
-        """
-        st.code(operations_code, language = "python")
+        st.markdown("""
+        TBD
+        """)
+        
 
 
     with tab2:
-        st.header('Pandas')
-        st.write('As a first step install and import pandas for usage')
-        st.write("Run the first commmand on your terminal and add the next chunk of code on the top of your script.")
+        st.header('Start with the basics')
 
-        install_code = """
-        pip install pandas
-        """
-        st.code(install_code, language = "python")
+        selected_topic = st.selectbox("Select an option:", ["Declare variables", "Vectors and Matrices", "Dataframes"])
 
-        # Chunk of code for importing NumPy
-        st.write("### Import Pandas")
-        import_code = """
-        import pandas as pd
-        """
-        st.code(import_code, language = "python")
+        if selected_topic == "Declare variables":
+            selected_language = st.radio("Select a programming language:", ["R", "Python"])
+            if selected_language == "R":
+                st.markdown("""
+                ## Declare variables
+                Let's start with the basics, how to assign values to variables
+                """)
+                assign_r = """
+                # Assign values to variables 
+                x <- 5
+                y <- 9
+
+                # See the type of variable that you have
+                class(x)
+                class(y)
+                """
+
+                st.code(assign_r, language = "python")
+
+                st.markdown("""
+                ## Math operations
+                Try the following lines of code to see how to do basic math with R
+                """)
+
+                math_r = """
+                # Do some basic math
+                x + y 
+                x - y 
+                x*y 
+                x/y
+                x^y
+                sin(x)
+                cos(x)
+                tan(x)
+                """
+
+                st.code(math_r, language = "python")
+                
+                
+            elif selected_language == "Python":
+
+                st.markdown("""
+                ## Declare variables
+                Let's start with the basics, how to assign values to variables
+                """)
+
+                assign_py = """
+                # Assign values to variables 
+                x = 5
+                y = 9
+
+                # See the type of variable that you have
+                print(type(x), type(y))
+                """
+
+                st.code(assign_py, language = "python")
+
+
+                st.write("Let's start using some libraries for math operations")
+                st.write("Run the first commmand on your terminal and add the next chunk of code on the top of your script.")
+
+                install_code = """
+                pip install numpy
+                """
+                st.code(install_code, language = "python")
+
+                # Chunk of code for importing NumPy
+                st.write("### Import NumPy")
+                import_code = """
+                import numpy as np
+                """
+                st.code(import_code, language = "python")
+
+                math_py = """
+                # Do some basic math
+                print(x + y)
+                print(x - y)
+                print(x*y)
+                print(x/y)
+                print(x^y)
+                print(np.sin(x))
+                print(np.cos(x))
+                print(np.tan(x))
+                """
+
+                st.code(math_py, language = "python")
+
+                
+            
+            
+        elif selected_topic == "Vectors and Matrices":
+            
+            selected_language = st.radio("Select a programming language:", ["R", "Python"])
+            if selected_language == "R":
+                st.markdown("""
+                ## Vectors and matrices
+                Try the following lines of code to see how to do vectors and matrices with R
+                """)
+
+                v_m_r = """
+                # Declare vectors through different commands
+                z <- 1:10
+                w <- c(4,2,5,7,8,9,0,3,2,6)
+                x <- runif(10)*100
+                t <- sample(x,5, replace = TRUE)
+                y <- seq(from=10, to=1, by=-1)
+                z
+                w
+                x
+                t
+                y
+
+                # Let's create a matrix of 4 columns and 10 rows with vectors (x,z,w,y)
+                mat <- matrix(data= c(x,z,w,y), ncol = 4, nrow = 10)
+                mat
+
+                """
+
+                st.code(v_m_r, language = "python")
+
+                st.markdown("""
+                ## Operations with vectors and matrices
+                Try the following lines of code to see the math between these objects
+                """)
+
+                vmo_r = """
+                # Declare the following objects
+                mata <- matrix(1:9, ncol = 3, nrow = 3)
+                matb <- matrix(10:18, ncol = 3, nrow = 3)
+                va <- 1:3
+                vb <- 4:6
+                mata
+                matb
+                va
+                vb
+
+
+                # Do some math
+                mata + matb
+                mata - matb
+                mata / matb
+                mata * matb
+                sin(mata)
+                mata^2
+                mata + va
+                mata + vb
+                mata*va
+                mata/va
+                va*vb
+                va + vb
+                va - vb
+
+                """
+
+                st.code(vmo_r, language = "python")
+
+            elif selected_language == "Python":
+                st.markdown("""
+                ## Vectors and matrices
+                Try the following lines of code to see how to do vectors and matrices with python
+                """)
+
+                v_m_py = """
+                # Declare vectors through different commands
+                z = np.arange(1, 11)
+                w = np.array([4, 2, 5, 7, 8, 9, 0, 3, 2, 6])
+                x = np.random.rand(10) * 100
+                t = random.choices(x, k=5)
+                y = np.arange(10, 0, -1)
+                z
+                w
+                x
+                t
+                y
+
+                # Let's create a matrix of 4 columns and 10 rows with vectors (x,z,w,y)
+                mat <- np.column_stack((x, z, w, y))
+                mat
+                """
+
+                st.code(v_m_py, language = "python")
+
+                st.markdown("""
+                ## Operations with vectors and matrices
+                Try the following lines of code to see the math between these objects
+                """)
+
+                vmo_py = """
+                # Declare the following objects
+                mata = np.reshape(np.arange(1, 10), (3, 3))
+                matb = np.reshape(np.arange(10, 19), (3, 3))
+                va = np.arange(1, 4)
+                vb = np.arange(4, 7)
+                print(mata)
+                print(matb)
+                print(va)
+                print(vb)
+
+
+                # Do some math
+                print(mata + matb)
+                print(mata - matb)
+                print(mata / matb)
+                print(mata * matb)
+                print(np.sin(mata))
+                print(mata**2)
+                print(mata + va)
+                print(mata + vb)
+                print(mata*va)
+                print(mata/va)
+                print(va*vb)
+                print(va + vb)
+                print(va - vb)
+
+                """
+                st.code(vmo_py, language = "python")
+
+        elif selected_topic == "Dataframes":
+
+            selected_language = st.radio("Select a programming language:", ["R", "Python"])
+
+            if selected_language == "R":
+                st.markdown("""
+                ## Tidyverse for data manipulation
+                            
+                Let's start by installing the library on the terminal
+                """)
+                install_df_r = """
+                install.packages("tidyverse")
+                """
+                st.code(install_df_r, language = "python")
+
+                st.write("Read Tidyverse library. This command should be at the top of your script")
+                tidy_r = """
+                library(tidyverse)
+                """
+                st.code(tidy_r, language = "python")
+
+
+
+            elif selected_language == "Python":
+                st.markdown("""
+                ## Pandas for data manipulation
+                            
+                Let's start by installing the library on the terminal
+                """)
+                install_pandas_py = """
+                pip install pandas
+                """
+                st.code(install_pandas_py, language = "python")
+
+                st.write("Import Pandas")
+                import_pandas_py = """
+                import pandas as pd
+                """
+                st.code(import_pandas_py, language = "python")
+        
+
+        
+
+        
 
 def statistical_learning_page():
     st.title("Statistical Learning Algorithms")
@@ -277,7 +498,7 @@ def machine_learning_page():
         
         selected_algorithm = st.selectbox("Select an Unsupervised Machine Learning Algorithm", ["K-Means", "Hierarchical Clustering"])
         if selected_algorithm == "K-Means":
-            
+
             st.markdown("""
             K-Means algorithm works through the following steps:
                         
@@ -289,6 +510,7 @@ def machine_learning_page():
             """)
 
             kmeans_code = """
+
             # Import libraries
             import pandas as pd
             import numpy as np
@@ -845,7 +1067,7 @@ def main():
     st.sidebar.title("Navigation")
     pages = {
         "Homepage": homepage,
-        "Basic Python": basic_python_page,
+        "Basic Python": basic_programming,
         "Statistical Learning": statistical_learning_page,
         "Machine Learning": machine_learning_page,
     }
