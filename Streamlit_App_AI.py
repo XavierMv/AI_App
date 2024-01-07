@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np 
+from sklearn.datasets import load_iris
 
 
 def homepage():
@@ -425,7 +426,6 @@ def statistical_learning_page():
         import numpy as np
         import pandas as pd
         from sklearn.datasets import make_regression
-        from sklearn.linear_model import Ridge, Lasso
         from sklearn.metrics import mean_absolute_error, mean_squared_error
         from sklearn.model_selection import train_test_split
         from sklearn.metrics import r2_score
@@ -690,7 +690,7 @@ def machine_learning_page():
             import numpy as np
             import pandas as pd
             from sklearn.model_selection import GridSearchCV, train_test_split
-            from sklearn.linear_model import Ridge
+            from sklearn.linear_model import Lasso
             from sklearn.metrics import mean_squared_error
             from sklearn.preprocessing import StandardScaler
 
@@ -701,8 +701,8 @@ def machine_learning_page():
             scaler = StandardScaler()
             X_train_scaled = scaler.fit_transform(X_train)
 
-            # Define the Ridge Regression model
-            ridge_model = Lasso()
+            # Define the Lasso Regression model
+            lasso_model = Lasso()
 
             # Define the hyperparameter grid. This you can select if you want to run the GridSearch through all the hyperparameters
             param_grid = {
@@ -712,7 +712,7 @@ def machine_learning_page():
             }
 
             # Create GridSearchCV object
-            grid_search = GridSearchCV(estimator = ridge_model, param_grid = param_grid, scoring = 'neg_mean_squared_error', cv = 5)
+            grid_search = GridSearchCV(estimator = lasso_model, param_grid = param_grid, scoring = 'neg_mean_squared_error', cv = 5)
 
             # Fit the model
             grid_search.fit(X_train_scaled, y_train)
