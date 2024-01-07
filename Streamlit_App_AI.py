@@ -748,7 +748,12 @@ def machine_learning_page():
         st.write("Let's explore Supervised Machine Learning.")
         selected_supervised_model = st.selectbox("Select a Supervised Machine Learning Model", ["Ridge", "Lasso", "LDA", "SVM", "Decision Tree", "Random Forest", "GBM", "XGBM", "LightGBM"])
         if selected_supervised_model == "Ridge":
-            st.write("Here is the code for Ridge")
+            st.markdown("""
+            Ridge regression, a machine learning approach akin to linear regression in statistical learning, involves fitting your data while retaining all available features.
+            To identify the optimal model, pinpoint the critical juncture where errors escalate exponentially. In doing so, seek a model incorporating a specific penalization 
+            factor around that pivotal area. This meticulous process ensures the creation of a robust and effective model.
+            """)
+            
             rdige_code = """
 
             # Import libraries
