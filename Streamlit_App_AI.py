@@ -16,12 +16,6 @@ def homepage():
         I bring a strong background in credit risk analysis and data science, with hands-on experience
         in developing impactful solutions for leading financial and consulting organizations.
 
-        ### Santander - Credit Risk Intern
-        As a Credit Risk intern at Santander, I played a key role in developing time series models to estimate
-        credit default. This involved leveraging advanced statistical techniques to analyze historical data and
-        predict future credit events. My work contributed to enhancing the bank's ability to make informed
-        decisions in managing credit risk.
-
         ### Accenture - Data Scientist
         In my role as a Data Scientist at Accenture, I worked on a variety of projects spanning revenue growth
         management (RGM), data monetization strategies, customer analytics, and smart spend strategies. I provided
@@ -32,6 +26,12 @@ def homepage():
         My experience at Accenture involved collaborating with cross-functional teams, interpreting complex data
         sets, and delivering actionable insights to clients. I also contributed to the development of innovative AI
         solutions tailored to the specific needs of diverse industries.
+
+        ### Santander - Credit Risk Intern
+        As a Credit Risk intern at Santander, I played a key role in developing time series models to estimate
+        credit default. This involved leveraging advanced statistical techniques to analyze historical data and
+        predict future credit events. My work contributed to enhancing the bank's ability to make informed
+        decisions in managing credit risk.
 
         My educational background includes studies in Actuarial Sciences and financial engineering at Universidad
         Anáhuac México. Currently, I am pursuing a Master of Management in Artificial Intelligence at Queen's University.
@@ -1108,7 +1108,7 @@ def machine_learning_page():
 def main():
     st.sidebar.title("Navigation")
     pages = {
-        "Homepage": homepage,
+        "About Me": homepage,
         "Basic Programming for Statistics & AI": basic_programming,
         "Statistical Learning": statistical_learning_page,
         "Machine Learning": machine_learning_page,
