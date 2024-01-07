@@ -75,7 +75,7 @@ def basic_programming():
     with tab2:
         st.header('Start with the basics')
 
-        selected_topic = st.selectbox("Select an option:", ["Declare variables", "Vectors and Matrices", "Dataframes"])
+        selected_topic = st.selectbox("Select an option:", ["Declare variables", "Vectors and Matrices", "Dataframes", "Loops","Plots"])
 
         if selected_topic == "Declare variables":
             selected_language = st.radio("Select a programming language:", ["R", "Python"])
