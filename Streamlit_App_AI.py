@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np 
-from sklearn.datasets import load_iris
 
 
 def homepage():
@@ -540,7 +539,6 @@ def machine_learning_page():
         
         selected_algorithm = st.selectbox("Select an Unsupervised Machine Learning Algorithm", ["K-Means", "Hierarchical Clustering"])
         if selected_algorithm == "K-Means":
-
             st.markdown("""
             K-Means algorithm works through the following steps:
                         
@@ -551,66 +549,94 @@ def machine_learning_page():
             
             """)
 
-            kmeans_code = """
+            selected_language = st.radio("Select a programming language:", ["R", "Python"])
+            if selected_language == "R":
+                
+                kmeans_r = """
+                # Upload the necessary libraries
+                library(ggplot2)
+                library(dendextend)
+                library(factoextra)
+                library(cluster)
 
-            # Import libraries
-            import pandas as pd
-            import numpy as np
-            from sklearn.preprocessing import StandardScaler
-            from sklearn.cluster import KMeans
-            from sklearn.metrics import silhouette_score
-            from sklearn.datasets import make_blobs
-            import matplotlib.pyplot as plt
+                # Scale the data and create a distance matrix
+                df <- scale(data)
+                dist_mat <- dist(df, method = "euclidean")
+
+                # Create Elbow method and Silhouette
+                fviz_nbclust(dist_mat, FUN = kmeans, method = "wss")
+                fviz_nbclust(dist_mat, FUN = kmeans, method = "silhouette")
+
+                # Select the optimal number of clusters, let's assume is 4
+                clust <- kmeans(dist_mat, 4)
+                clust$cluster
+                """
+
+                st.code(kmeans_r, language = "python")
+
+            elif selected_language == "Python":
+
+                kmeans_py = """
+                # Import libraries
+                import pandas as pd
+                import numpy as np
+                from sklearn.preprocessing import StandardScaler
+                from sklearn.cluster import KMeans
+                from sklearn.metrics import silhouette_score
+                import matplotlib.pyplot as plt
+
+                
+                # Scale the data
+                scaler = StandardScaler()
+                X_scaled = scaler.fit_transform(X)
+
+                # Generate Elbow method
+                inertia_values = []
+                for k in range(1, 11):
+                    kmeans = KMeans(n_clusters = k, random_state = 42)
+                    kmeans.fit(X_scaled)
+                    inertia_values.append(kmeans.inertia_)
+
+                # Plot Elbow method
+                plt.plot(range(1, 11), inertia_values, marker = 'o')
+                plt.title('Elbow Method for Optimal k')
+                plt.xlabel('Number of Clusters (k)')
+                plt.ylabel('Inertia')
+                plt.show()
+
+                # Generate Silhouette method
+                silhouette_scores = []
+                for k in range(2, 11):
+                    kmeans = KMeans(n_clusters = k, random_state = 42)
+                    labels = kmeans.fit_predict(X_scaled)
+                    silhouette_scores.append(silhouette_score(X_scaled, labels))
+
+                # Plot Silhouette method
+                plt.plot(range(2, 11), silhouette_scores, marker = 'o')
+                plt.title('Silhouette Method for Optimal k')
+                plt.xlabel('Number of Clusters (k)')
+                plt.ylabel('Silhouette Score')
+                plt.show()
+
+                # Select the optimal number of clusters for the final model
+                k = 4
+                kmeans_final = KMeans(n_clusters = final_k, random_state = 42)
+                labels = kmeans_final.fit_predict(X_scaled)
+
+                # Visualize the clusters
+                plt.scatter(X_scaled[:, 0], X_scaled[:, 1], c = labels, cmap = 'viridis', edgecolor = 'k')
+                plt.scatter(kmeans_final.cluster_centers_[:, 0], kmeans_final.cluster_centers_[:, 1], c = 'red', marker = 'X', s = 200)
+                plt.title("KMeans Clustering with k = ", k)
+                plt.xlabel('Feature 1 (Scaled)')
+                plt.ylabel('Feature 2 (Scaled)')
+                plt.show()
+
+                """
+
+                st.code(kmeans_py, language = "python")
+            
 
             
-            # Scale the data
-            scaler = StandardScaler()
-            X_scaled = scaler.fit_transform(X)
-
-            # Generate Elbow method
-            inertia_values = []
-            for k in range(1, 11):
-                kmeans = KMeans(n_clusters = k, random_state = 42)
-                kmeans.fit(X_scaled)
-                inertia_values.append(kmeans.inertia_)
-
-            # Plot Elbow method
-            plt.plot(range(1, 11), inertia_values, marker = 'o')
-            plt.title('Elbow Method for Optimal k')
-            plt.xlabel('Number of Clusters (k)')
-            plt.ylabel('Inertia')
-            plt.show()
-
-            # Generate Silhouette method
-            silhouette_scores = []
-            for k in range(2, 11):
-                kmeans = KMeans(n_clusters = k, random_state = 42)
-                labels = kmeans.fit_predict(X_scaled)
-                silhouette_scores.append(silhouette_score(X_scaled, labels))
-
-            # Plot Silhouette method
-            plt.plot(range(2, 11), silhouette_scores, marker = 'o')
-            plt.title('Silhouette Method for Optimal k')
-            plt.xlabel('Number of Clusters (k)')
-            plt.ylabel('Silhouette Score')
-            plt.show()
-
-            # Select the optimal number of clusters for the final model
-            k = 4
-            kmeans_final = KMeans(n_clusters = final_k, random_state = 42)
-            labels = kmeans_final.fit_predict(X_scaled)
-
-            # Visualize the clusters
-            plt.scatter(X_scaled[:, 0], X_scaled[:, 1], c = labels, cmap = 'viridis', edgecolor = 'k')
-            plt.scatter(kmeans_final.cluster_centers_[:, 0], kmeans_final.cluster_centers_[:, 1], c = 'red', marker = 'X', s = 200)
-            plt.title("KMeans Clustering with k = ", k)
-            plt.xlabel('Feature 1 (Scaled)')
-            plt.ylabel('Feature 2 (Scaled)')
-            plt.show()
-
-            """
-
-            st.code(kmeans_code, language = "python")
 
         elif selected_algorithm == "Hierarchical Clustering":
             st.markdown("""
@@ -622,10 +648,100 @@ def machine_learning_page():
                 - Complete: Distance between clusters is the maximum distance between individual instances
                 - Single: Distance between clusters is the minimum distance between individual instances
                 - Average: Distance between clusters is the average distance between individual instances
-            3. Evaluate optimal number of clusters through Elbow method & Silhouette method
+            3. Evaluate optimal number of clusters through Elbow method, Silhouette method & Dendogram plot
             4. Choose the optimal number of clusters and assess through business criteria
             
             """)
+            selected_language = st.radio("Select a programming language:", ["R", "Python"])
+            if selected_language == "R":
+                
+                hierarchical_r = """
+                # Upload the necessary libraries
+                library(ggplot2)
+                library(dendextend)
+                library(factoextra)
+                library(cluster)
+
+                # Scale the data
+                df <- scale(data)
+                Hmodel <- hclust(df, method = "ward.D")
+
+                # Create Elbow method and Silhouette
+                fviz_nbclust(dist_mat, FUN = hcut, method = "wss")
+                fviz_nbclust(dist_mat, FUN = hcut, method = "silhouette")
+
+                # Plot Dendogram
+                plot(Hmodel)
+
+                # Select the optimal number of clusters, let's assume is 4
+                clust <- cutree(Hmodel, 4)
+                clust$cluster
+                """
+
+                st.code(hierarchical_r, language = "python")
+
+            elif selected_language == "Python":
+
+                hierarchical_py = """
+
+                # Import libraries
+                import pandas as pd
+                import numpy as np
+                from sklearn.preprocessing import StandardScaler
+                from sklearn.cluster import AgglomerativeClustering
+                from sklearn.metrics import silhouette_score
+                import matplotlib.pyplot as plt
+                import plotly.figure_factory as ff
+
+                
+                # Scale the data
+                scaler = StandardScaler()
+                X_scaled = scaler.fit_transform(X)
+
+                # Generate Elbow method
+                distortions = []
+                for k in range(1, max_clusters + 1):
+                    model = AgglomerativeClustering(n_clusters = k, linkage = 'ward')
+                    model.fit(X_scaled)
+                    distortions.append(np.sum((X_scaled - X_scaled.mean(axis = 0))**2) / X_scaled.shape[0])
+
+
+                # Plot Elbow method
+                plt.plot(range(1, max_clusters + 1), distortions, marker = 'o')
+                plt.title('Elbow Method')
+                plt.xlabel('Number of clusters')
+                plt.ylabel('Total within Sum of Squares')
+                plt.show()
+
+                # Generate Silhouette method
+                silhouette_scores = []
+                for k in range(2, max_clusters + 1):
+                    model = AgglomerativeClustering(n_clusters = k, linkage = 'ward')
+                    clusters = model.fit_predict(X_scaled)
+                    silhouette_scores.append(silhouette_score(X_scaled, clusters))
+
+
+                # Plot Silhouette method
+                plt.plot(range(2, max_clusters + 1), silhouette_scores, marker = 'o')
+                plt.title('Silhouette Method')
+                plt.xlabel('Number of clusters')
+                plt.ylabel('Score')
+                plt.show()
+
+                # Plot Dendogram
+                fig = ff.create_dendrogram(X_scaled)
+                fig.update_layout(width = 800, height = 500)
+                fig.show()
+
+
+                # Select the optimal number of clusters for the final model and let's assume is 4
+                hierarchical_4 = AgglomerativeClustering(n_clusters = 4, linkage='ward')
+                clusters_4 = hierarchical_4.fit_predict(df_scaled)
+                """
+
+                st.code(hierarchical_py, language = "python")
+
+            
 
 
     with Supervised:
