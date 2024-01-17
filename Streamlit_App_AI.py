@@ -1242,7 +1242,7 @@ def nlp():
         Go to the *API Keys* tab and create a new key and save it, we will use it in further steps to access ChatGPT.
         """)
 
-        client = openai.OpenAI()
+        client = openai.OpenAI("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")
 
         text_user = st.text_input('How can I help you?')
 
