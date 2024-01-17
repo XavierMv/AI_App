@@ -1262,6 +1262,8 @@ def nlp():
         print(f'ChatGPT: {response.choices[0].message.content}')
         """
 
+        st.code(chat_gpt_code, language = "python")
+
     
 def main():
     st.sidebar.title("Navigation")
