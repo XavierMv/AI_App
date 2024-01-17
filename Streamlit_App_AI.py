@@ -700,6 +700,7 @@ def machine_learning_page():
                 X_scaled = scaler.fit_transform(X)
 
                 # Generate Elbow method
+                max_clusters = 12 
                 distortions = []
                 for k in range(1, max_clusters + 1):
                     model = AgglomerativeClustering(n_clusters = k, linkage = 'ward')
@@ -737,7 +738,7 @@ def machine_learning_page():
 
                 # Select the optimal number of clusters for the final model and let's assume is 4
                 hierarchical_4 = AgglomerativeClustering(n_clusters = 4, linkage='ward')
-                clusters_4 = hierarchical_4.fit_predict(df_scaled)
+                clusters_4 = hierarchical_4.fit_predict(X_scaled)
                 """
 
                 st.code(hierarchical_py, language = "python")
