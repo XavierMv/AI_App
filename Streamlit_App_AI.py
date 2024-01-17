@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np 
+import openai
 
 
 def homepage():
@@ -1224,6 +1225,35 @@ def machine_learning_page():
             """
             st.code(lightgbm_code, language = "python")
 
+def nlp():
+    st.title("Natural Language Processing")
+    tab_titles = ['Overview', 'ChatGPT API', 'Sentiment Analysis', 'Topic Models', 'Transformers']
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(tab_titles)
+
+    with tab1:
+        st.header('Overview')
+    
+    with tab2:
+        st.markdown("""
+        The first thing you need to do to get started with ChatGPT on Python is to log-in on the following link:
+                    
+        https://platform.openai.com/api-keys
+        
+        Go to the *API Keys* tab and create a new key and save it, we will use it in further steps to access ChatGPT.
+        """)
+
+        client = openai.OpenAI()
+
+        text_user = st.text_input('How can I help you?')
+
+        response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": text_user}
+            ]
+        )
+        
+        st.write(f'ChatGPT: {response.choices[0].message.content}')
 
     
 def main():
@@ -1233,6 +1263,7 @@ def main():
         "Basic Programming for Statistics & AI": basic_programming,
         "Statistical Learning": statistical_learning_page,
         "Machine Learning": machine_learning_page,
+        "NLP": nlp
     }
 
     selected_page = st.sidebar.selectbox("Select a page", list(pages.keys()))
