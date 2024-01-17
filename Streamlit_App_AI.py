@@ -1240,20 +1240,27 @@ def nlp():
         https://platform.openai.com/api-keys
         
         Go to the *API Keys* tab and create a new key and save it, we will use it in further steps to access ChatGPT.
+        
+        Type the following code on your python script and get a full interaction with ChatGPT.
+                    
+        *NOTE: The calls to the API will be limited on your billing plan*
         """)
+    
+        chat_gpt_code = """
 
-        client = openai.OpenAI("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")
+        client = openai.OpenAI("write your key")
 
-        text_user = st.text_input('How can I help you?')
+        text_user = input("User: ")
 
         response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-3.5-turbo", # You can change the version of GPT depending on your billing plan
         messages=[
             {"role": "user", "content": text_user}
             ]
         )
         
-        st.write(f'ChatGPT: {response.choices[0].message.content}')
+        print(f'ChatGPT: {response.choices[0].message.content}')
+        """
 
     
 def main():
