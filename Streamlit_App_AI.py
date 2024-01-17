@@ -620,14 +620,14 @@ def machine_learning_page():
                 plt.show()
 
                 # Select the optimal number of clusters for the final model
-                k = 4
+                final_k = 4
                 kmeans_final = KMeans(n_clusters = final_k, random_state = 42)
                 labels = kmeans_final.fit_predict(X_scaled)
 
                 # Visualize the clusters
                 plt.scatter(X_scaled[:, 0], X_scaled[:, 1], c = labels, cmap = 'viridis', edgecolor = 'k')
                 plt.scatter(kmeans_final.cluster_centers_[:, 0], kmeans_final.cluster_centers_[:, 1], c = 'red', marker = 'X', s = 200)
-                plt.title("KMeans Clustering with k = ", k)
+                plt.title("KMeans Clustering with k = " + str(final_k))
                 plt.xlabel('Feature 1 (Scaled)')
                 plt.ylabel('Feature 2 (Scaled)')
                 plt.show()
