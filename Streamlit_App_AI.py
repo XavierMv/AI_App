@@ -1248,7 +1248,12 @@ def nlp():
     
         chat_gpt_code = """
 
-        client = openai.OpenAI("write your key")
+        import openai
+        import os
+
+        os.environ["OPENAI_API_KEY"] = "Write your API key"
+
+        client = openai.OpenAI()
 
         text_user = input("User: ")
 
