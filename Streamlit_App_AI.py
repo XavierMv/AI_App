@@ -165,6 +165,18 @@ def basic_programming():
 
                 st.code(math_py, language = "python")
 
+                x = 5
+                y = 9
+
+                print(x + y)
+                print(x - y)
+                print(x*y)
+                print(x/y)
+                print(x^y)
+                print(np.sin(x))
+                print(np.cos(x))
+                print(np.tan(x))
+
                 
             
             
